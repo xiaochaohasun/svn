@@ -33,6 +33,8 @@ def create_new_branches(branches,operator,programer,cre_day,merge_pattern):
     new_branches = {}
     for br_name in branches.keys():
         br_app = br_name.split("_")[1]
+        if br_app=='cms':
+            merge_pattern='pretrunk'
         br_fullName = "%s_%s_%s" % (cre_day, br_app, programer)
         new_branchName = '%s%s/%s/%s' % (svn_base_path, apps_dict[br_app],merge_pattern,br_fullName)
         br_exist_cmd='svn info %s &> /dev/null' % new_branchName
@@ -43,6 +45,7 @@ def create_new_branches(branches,operator,programer,cre_day,merge_pattern):
                 subprocess.call(cre_cmd, shell=True)
                 time.sleep(0.1)
         new_branches[br_app] = new_branchName
+        merge_pattern='pre-trunk'
     return new_branches
 
 # return a dict,example {'20170312_common_zjc':'http://192.168.1.13/code/gopay_2.1/common/branches/20170312_common_zjc'}
