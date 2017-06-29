@@ -51,10 +51,10 @@ def get_ori_branches(bran_file):
     branches = fobj.readlines()
     ori_branches = {}
     for _br in branches:
-        _name = _br.split("/")[-1]
-        ori_branches[_name] = _br.strip()
+        if _br != "\n":
+            _name = _br.split("/")[-1]
+            ori_branches[_name] = _br.strip()
     return ori_branches
-
 
 def get_log_version(branch,merge_log_path):
     logs = os.popen("svn log --stop-on-copy %s" % branch)
