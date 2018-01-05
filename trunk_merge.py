@@ -46,6 +46,7 @@ def get_ori_branches(bran_file):
         if _br != "\n":
             _name = _br.split("/")[-1].split("_")[1]
             ori_branches[_name] = _br.strip()
+    fobj.close()
     return ori_branches
 
 
